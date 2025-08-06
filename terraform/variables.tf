@@ -1,15 +1,23 @@
 variable "aws_region" {
-  default = "ap-northeast-1"
+  description = "AWS region to deploy resources"
+  type        = string
+  default     = "ap-northeast-1"
 }
 
 variable "vpc_cidr" {
-  default = "10.0.0.0/16"
+  description = "CIDR block for the VPC"
+  type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
-  default = "10.0.1.0/24"
+  description = "CIDR block for the public subnet"
+  type        = string
+  default     = "10.0.1.0/24"
 }
 
 variable "availability_zone" {
-  default = "ap-northeast-1a"
+  description = "Availability Zone to place subnet in"
+  type        = string
+  default     = "ap-northeast-1a"
 }
