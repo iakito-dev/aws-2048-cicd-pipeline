@@ -1,4 +1,3 @@
-# ALB Security Group
 resource "aws_security_group" "alb_sg" {
   name        = "alb-sg"
   vpc_id      = var.vpc_id
@@ -25,7 +24,6 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-# ECS Security Group
 resource "aws_security_group" "ecs_sg" {
   name        = "ecs-sg"
   vpc_id      = var.vpc_id
