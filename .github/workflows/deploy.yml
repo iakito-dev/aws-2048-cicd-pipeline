@@ -1,0 +1,70 @@
+name: Deploy to ECS
+
+# Trigger this workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+# Environment variables shared across all steps
+env:
+  AWS_REGION: ap-northeast-1
+  ECR_REPOSITORY: 2048-game-repo
+  ECS_CLUSTER: 2048-game-cluster
+  ECS_SERVICE: 2048-game-cluster-service
+  ECS_TASK_FAMILY: 2048-task
+
+jobs:
+  deploy:
+    name: Build & Deploy to ECS
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout source code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set AWS credentials from GitHub Secrets
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Step 3: Log in to Amazon ECR
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Step 4: Build Docker image and push to ECR
+      - name: Build, tag, and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          IMAGE_TAG=latest
+          docker build --platform linux/x86_64 -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      # Step 5: Register new task definition and update ECS service
+      - name: Register new task definition and update ECS service
+        run: |
+          # Fetch current task definition
+          TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $ECS_TASK_FAMILY)
+
+          # Extract required fields and save new definition
+          NEW_TASK_DEF=$(echo "$TASK_DEFINITION" | jq '.taskDefinition | {family, containerDefinitions, executionRoleArn, networkMode, requiresCompatibilities, cpu, memory}')
+          echo "$NEW_TASK_DEF" > new-task-def.json
+
+          # Register new revision
+          aws ecs register-task-definition --cli-input-json file://new-task-def.json
+
+          # Get revision number
+          REVISION=$(aws ecs describe-task-definition --task-definition $ECS_TASK_FAMILY \
+                    | jq '.taskDefinition.revision')
+
+          # Update ECS service to use new task definition
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
+            --task-definition $ECS_TASK_FAMILY:$REVISION
