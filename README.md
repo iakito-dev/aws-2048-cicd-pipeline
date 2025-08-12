@@ -10,7 +10,7 @@ Terraform バックエンドには **HCP Terraform** を採用し、クラウド
 ## ゲーム画面
 ![Image](https://github.com/user-attachments/assets/75bc99ec-fa7c-4420-8c99-bfb4c4aeb5a2)
 
-URL: （通常公開停止中）
+URL: http://2048-game-alb-1158270931.ap-northeast-1.elb.amazonaws.com （通常公開停止中）
 
 ---
 
