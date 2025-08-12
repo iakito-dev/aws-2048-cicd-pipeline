@@ -5,6 +5,5 @@ terraform {
       name = "aws-2048-cicd-pipeline"
     }
   }
-
-  required_version = ">= 1.5.0"
+  required_version = "~> 1.12.0"
 }
