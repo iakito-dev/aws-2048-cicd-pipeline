@@ -1,4 +1,4 @@
-# 🎯 2048 Game on AWS - 完全自動化 CI/CD パイプライン
+# 🎯 2048 Game on AWS
 
 ## 📌 プロジェクト概要
 このプロジェクトは、人気パズルゲーム「2048」を **Docker** でコンテナ化し、**AWS ECS Fargate** 上にデプロイするための **CI/CD パイプライン** を構築したものです。  
@@ -7,10 +7,8 @@ Terraform バックエンドには **HCP Terraform** を採用し、クラウド
 
 ---
 
-## 🖼 スクリーンショット
-
-### ゲーム画面
-![2048-game-screenshot](./images/game-screenshot.png)
+## ゲーム画面
+![Image](https://github.com/user-attachments/assets/75bc99ec-fa7c-4420-8c99-bfb4c4aeb5a2)
 
 URL: （通常公開停止中）
 
@@ -96,21 +94,29 @@ URL: （通常公開停止中）
 ## HCP Terraform 上での実行例
 
 1. **New Run** を作成  
+![New Run](https://github.com/user-attachments/assets/3e031a8f-ded4-4899-bbc6-1bf0f273240b)
+
 2. **Plan** を確認（変更点を GUI で可視化）  
-3. 確認後 **Apply** を実行 
+![Plan](https://github.com/user-attachments/assets/2130908e-5947-4edf-a725-6be2353c202f)
+
+3. 確認後 **Apply** を実行  
+
+---
 
 ### HCP Terraform の利点
 
 - **リソースや Outputs を GUI で一覧確認可能**  
-  ![hcp-outputs](./images/hcp-outputs.png)
-- **States の履歴管理・ロールバック** が容易  
-  ![hcp-state-history](./images/hcp-state-history.png)
-- **チームコラボレーション**（実行履歴や差分を共有）  
-- **VCS 連携による自動 Plan / Apply**（例：GitHub）  
-- **環境変数やシークレットの安全管理**  
+  ![Outputs](https://github.com/user-attachments/assets/21225e73-ad16-49e5-95d1-a945524b4e8d)
+
+- **States の履歴管理・ロールバックが容易**
+- **チームコラボレーション**（実行履歴や差分を共有）
+- **VCS 連携による自動 Plan / Apply**（例: GitHub）
+- 環境変数やシークレットの安全管理
 - ローカル CLI 実行不要で **ブラウザから IaC 管理可能**
 
-## 💡 今後の改善点
+---
+
+## 今後の改善点
 以下の点については、今後さらに改善していくことで、運用性や信頼性の向上が期待できると考えています：
 
 - **HTTPS対応**  
@@ -135,8 +141,6 @@ URL: （通常公開停止中）
 - AWS 認証情報設定済み（`aws configure` または環境変数）
 - Docker インストール済み
 
----
-
 ### 手順例
 
 ```bash
@@ -155,7 +159,7 @@ terraform apply
 
 # 5. 環境破棄
 terraform destroy
-
+```
 
 ---
 
