@@ -39,10 +39,6 @@ URL: http://2048-game-alb-1158270931.ap-northeast-1.elb.amazonaws.com （通常�
   S3 や DynamoDB の構築不要で、クラウド上に安全に Terraform の状態を保存。  
   バックエンド設定を簡素化し、複数端末からのアクセスやチームでのインフラ管理を効率化。
 
----
-
-## 🏗 アーキテクチャ図
-![architecture-diagram](./images/architecture-diagram.png)
 
 ---
 
