@@ -1,16 +1,16 @@
 # 🎯 2048 Game on AWS
 
 ## 📌 プロジェクト概要
-このプロジェクトは、人気パズルゲーム「2048」を **Docker** でコンテナ化し、**AWS ECS Fargate** 上にデプロイするための **CI/CD パイプライン** を構築したものです。  
-**GitHub Actions** と **Terraform** を活用し、コードのプッシュからビルド・デプロイまでの一連の流れを完全自動化しました。  
-Terraform バックエンドには **HCP Terraform** を採用し、クラウド上での状態管理とチーム開発を容易にしています。
+人気パズルゲーム「2048」を **Docker** でコンテナ化し、**AWS ECS Fargate** 上にデプロイするための **CI/CD パイプライン** を構築しました。  
+**GitHub Actions** と **Terraform** を活用し、コードのプッシュからビルド・デプロイまでの一連の流れを完全自動化しています。  
+Terraform バックエンドには、クラウド上でのステート管理とチーム開発を容易にするため**HCP Terraform** を採用しました。
 
 ---
 
 ## ゲーム画面
 ![Image](https://github.com/user-attachments/assets/75bc99ec-fa7c-4420-8c99-bfb4c4aeb5a2)
 
-URL: http://2048-game-alb-1158270931.ap-northeast-1.elb.amazonaws.com （通常公開停止中）
+URL: http://2048-game-alb-1158270931.ap-northeast-1.elb.amazonaws.com
 
 ---
 
@@ -113,7 +113,7 @@ URL: http://2048-game-alb-1158270931.ap-northeast-1.elb.amazonaws.com （通常�
 ---
 
 ## 今後の改善点
-以下の点については、今後さらに改善していくことで、運用性や信頼性の向上が期待できると考えています：
+以下の点については、今後さらに改善していくことで運用性や信頼性の向上が期待できると考えています：
 
 - **HTTPS対応**  
   ACM証明書を利用してHTTPS通信を有効化することで、よりセキュアなアクセス環境を提供できると考えています。Route 53などを活用した独自ドメインの導入も検討したいです。
@@ -162,7 +162,6 @@ terraform destroy
 ## 作者 / Author
 
 **Akito Ito**  
-元 AWS Cloud Support Engineer（RDS / DMS）  
 GitHub: [@nasu-dev](https://github.com/nasu-dev)
 
 ---
